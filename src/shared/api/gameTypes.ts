@@ -13,6 +13,9 @@ export type Character = {
   className?: string;
   level?: number;
   experience?: number;
+  experienceToNextLevel?: number;
+  levelUpAvailable?: boolean;
+  proficiencyBonus?: number;
   hitPoints?: number;
   maxHitPoints?: number;
   gold?: number;
