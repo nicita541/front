@@ -16,10 +16,11 @@ export function DashboardPage() {
         <div>
           <span className="eyebrow">Главная</span>
           <h1>Добро пожаловать, {meQuery.data?.displayName ?? meQuery.data?.username ?? 'искатель приключений'}</h1>
-          <p>Здесь будет быстрый старт кампании, последние игры и состояние подключения к backend.</p>
+          <p>Здесь быстрый старт кампании, последние игры и состояние подключения к backend.</p>
         </div>
         <div className="dashboard-actions">
           <Link className="primary-button" to="/games">Мои игры</Link>
+          {lastGame && <Link className="secondary-button" to={`/games/${lastGame.id}`}>Последняя кампания</Link>}
           {lastGame && <Link className="secondary-button" to={`/play/${lastGame.id}`}>Продолжить</Link>}
         </div>
       </header>
@@ -57,6 +58,7 @@ export function DashboardPage() {
                 <p>{game.id}</p>
               </div>
               <div className="row-actions">
+                <Link className="secondary-button" to={`/games/${game.id}`}>Детали</Link>
                 <Link className="secondary-button" to={`/games/${game.id}/character`}>Персонаж</Link>
                 <Link className="primary-button small" to={`/play/${game.id}`}>Играть</Link>
               </div>
