@@ -37,9 +37,12 @@ docker compose -f compose.frontend.yml up -d --build
 ## Основные маршруты
 
 - `/login` — вход и регистрация
+- `/dashboard` — главная страница приложения
 - `/games` — список game states и создание игры
 - `/games/:gameStateId/character` — создание персонажа
 - `/play/:gameStateId` — игровой экран
+- `/profile` — профиль и данные сессии
+- `/diagnostics` — проверка подключения к backend
 
 ## Backend endpoints, которые использует frontend
 
@@ -53,17 +56,26 @@ docker compose -f compose.frontend.yml up -d --build
 - `GET /api/play/{gameStateId}/status`
 - `POST /api/play/{gameStateId}/actions`
 
-Если в Swagger фактический путь действия игрока отличается, нужно поправить только `src/shared/api/playApi.ts`.
+Если в Swagger фактический путь действия игрока отличается, нужно поправить `src/shared/api/endpoints.ts`.
 
 ## Что уже есть в UI
 
 - Авторизация с сохранением JWT
+- Dashboard после входа
+- Профиль пользователя
 - Список кампаний
 - Создание game state
 - Создание персонажа
 - Игровой экран
 - Быстрые действия игрока
-- Журнал событий
+- Вкладки игрового стола: журнал, инвентарь, прогресс
+- Журнал событий в стиле чата мастера
 - Карточка персонажа
 - XP progress и level-up indicator
 - Инвентарь
+- Диагностика API
+
+## Документация
+
+- `docs/API_CONTRACT.md` — ожидаемый контракт backend API
+- `docs/FRONTEND_ARCHITECTURE.md` — структура frontend
