@@ -22,7 +22,6 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
-
 button, input, select, textarea { font: inherit; }
 
 input, select, textarea {
@@ -67,26 +66,39 @@ label { display: block; margin: 14px 0 8px; color: var(--muted); font-size: 13px
 .game-card p { margin: 0; color: var(--muted); font-size: 13px; word-break: break-all; }
 .row-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-.primary-button, .secondary-button, .link-button { border: 0; border-radius: 14px; padding: 12px 16px; cursor: pointer; font-weight: 800; display: inline-flex; justify-content: center; align-items: center; }
+.primary-button, .secondary-button, .link-button, .chip-button { border: 0; border-radius: 14px; padding: 12px 16px; cursor: pointer; font-weight: 800; display: inline-flex; justify-content: center; align-items: center; }
 .primary-button { background: var(--gold); color: #171106; }
+.primary-button:disabled { opacity: 0.6; cursor: not-allowed; }
 .primary-button.small { padding: 10px 12px; }
 .secondary-button { background: var(--panel-soft); color: var(--text); border: 1px solid var(--line); }
 .link-button { width: 100%; margin-top: 10px; color: var(--muted); background: transparent; }
+.chip-button { background: rgba(214,163,60,0.10); color: #ffd98c; border: 1px solid rgba(214,163,60,0.25); padding: 9px 11px; font-size: 13px; }
 .error-box { border: 1px solid rgba(216,102,102,0.45); background: rgba(216,102,102,0.12); color: #ffc1c1; padding: 12px; border-radius: 14px; margin: 14px 0; }
+.success-box { border: 1px solid rgba(101,184,115,0.45); background: rgba(101,184,115,0.12); color: #c8ffd1; padding: 10px 12px; border-radius: 14px; margin-top: 12px; }
 
 .play-layout { display: grid; grid-template-columns: 1fr 340px; gap: 18px; margin-bottom: 18px; }
 .scene-panel { min-height: 430px; background: linear-gradient(145deg, rgba(33, 43, 51, 0.92), rgba(23, 26, 39, 0.96)); display: flex; flex-direction: column; justify-content: space-between; }
 .scene-text { max-width: 760px; color: var(--muted); font-size: 18px; }
 .action-form { margin-top: auto; }
+.quick-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
 .character-panel { align-self: stretch; }
 .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
 .stat-grid div { background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
 .stat-grid strong { display: block; font-size: 26px; }
 .stat-grid span { color: var(--muted); font-size: 13px; }
+.progress-block { margin-top: 18px; }
+.progress-label { display: flex; justify-content: space-between; color: var(--muted); margin-bottom: 8px; }
+.progress-label strong { color: var(--text); }
+.progress-bar { height: 10px; background: #10131d; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.progress-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--green), var(--gold)); }
+.bottom-grid { align-items: start; }
 .journal-list { display: grid; gap: 10px; }
 .journal-entry { border-left: 3px solid var(--gold); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 12px 14px; }
 .journal-entry small { color: var(--muted); }
 .journal-entry p { margin: 6px 0 0; }
+.inventory-list { display: grid; gap: 10px; }
+.inventory-item { display: flex; justify-content: space-between; gap: 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 12px; }
+.inventory-item span { color: var(--muted); }
 
 @media (max-width: 900px) {
   .auth-page, .app-shell, .two-columns, .play-layout { grid-template-columns: 1fr; }
