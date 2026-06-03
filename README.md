@@ -46,6 +46,7 @@ docker compose -f compose.frontend.yml up -d --build
 - `/login` — вход и регистрация
 - `/dashboard` — главная страница приложения
 - `/games` — список game states и создание игры
+- `/games/:gameStateId` — детали кампании
 - `/games/:gameStateId/character` — создание персонажа
 - `/play/:gameStateId` — игровой экран
 - `/profile` — профиль и данные сессии
@@ -71,6 +72,7 @@ docker compose -f compose.frontend.yml up -d --build
 - Dashboard после входа
 - Профиль пользователя
 - Список кампаний
+- Детали кампании
 - Создание game state
 - Создание персонажа
 - Игровой экран
