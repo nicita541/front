@@ -12,13 +12,15 @@ export function CharacterCreatePage() {
   const [background, setBackground] = useState('Бывший стражник пограничной заставы.');
   const charactersQuery = useQuery({ queryKey: ['characters', gameStateId], queryFn: () => getCharacters(gameStateId), enabled: Boolean(gameStateId) });
   const createMutation = useMutation({
-    mutationFn: () => createCharacter(gameStateId, { name, className, background }),
+    mutationFn: () => createCharacter(gameStateId, { name: name.trim(), className, background }),
     onSuccess: () => navigate(`/play/${gameStateId}`),
   });
 
   function submit(event: FormEvent) {
     event.preventDefault();
-    createMutation.mutate();
+    if (name.trim()) {
+      createMutation.mutate();
+    }
   }
 
   return (
@@ -46,11 +48,22 @@ export function CharacterCreatePage() {
           </select>
           <label>История</label>
           <textarea value={background} onChange={(event) => setBackground(event.target.value)} />
-          <button className="primary-button" disabled={createMutation.isPending}>Создать и играть</button>
+          {createMutation.isError && <div className="error-box">Не удалось создать персонажа.</div>}
+          <button className="primary-button" disabled={createMutation.isPending || !name.trim()}>
+            {createMutation.isPending ? 'Создаю...' : 'Создать и играть'}
+          </button>
         </form>
         <div className="panel">
           <h2>Персонажи игры</h2>
-          {charactersQuery.isLoading && <p className="muted">Загрузка...</p>}
+          {charactersQuery.isLoading && <div className="info-box">Загружаю персонажей...</div>}
+          {charactersQuery.isError && <div className="error-box">Ошибка загрузки персонажей.</div>}
+          {charactersQuery.isSuccess && charactersQuery.data.length === 0 && (
+            <div className="empty-state">
+              <div className="empty-state-icon">✦</div>
+              <h3>Персонажей пока нет</h3>
+              <p>Создай первого героя слева, чтобы начать игру.</p>
+            </div>
+          )}
           {(charactersQuery.data ?? []).map((character) => (
             <article className="game-card" key={character.id}>
               <div>
