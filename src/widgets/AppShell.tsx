@@ -23,6 +23,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <nav className="nav">
           <NavLink to="/dashboard">Главная</NavLink>
           <NavLink to="/games">Мои игры</NavLink>
+          <NavLink to="/profile">Профиль</NavLink>
           <NavLink to="/diagnostics">Диагностика API</NavLink>
           <a href="http://localhost:8080/swagger" target="_blank" rel="noreferrer">Swagger</a>
         </nav>
