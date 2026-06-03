@@ -11,10 +11,13 @@ const quickActions = [
   'Продвинуться осторожно вперёд.',
 ];
 
+type PlayTab = 'journal' | 'inventory' | 'progress';
+
 export function PlayPage() {
   const { gameStateId = '' } = useParams();
   const queryClient = useQueryClient();
   const [action, setAction] = useState(quickActions[0]);
+  const [activeTab, setActiveTab] = useState<PlayTab>('journal');
   const statusQuery = useQuery({ queryKey: ['play-status', gameStateId], queryFn: () => getPlayStatus(gameStateId), enabled: Boolean(gameStateId) });
   const character = statusQuery.data?.character;
   const inventory = statusQuery.data?.inventory ?? [];
@@ -86,34 +89,53 @@ export function PlayPage() {
         </aside>
       </section>
 
-      <section className="grid two-columns bottom-grid">
-        <div className="panel journal-panel">
-          <h2>Журнал</h2>
-          {statusQuery.isLoading && <p className="muted">Загрузка...</p>}
-          {statusQuery.isError && <div className="error-box">Ошибка загрузки play/status.</div>}
-          {!statusQuery.isLoading && entries.length === 0 && <p className="muted">Событий пока нет. Отправь первое действие мастеру.</p>}
-          <div className="journal-list">
-            {entries.map((entry, index) => (
-              <article className="journal-entry" key={entry.id ?? index}>
-                <small>{entry.type ?? entry.source ?? 'event'}</small>
-                <p>{entry.message ?? entry.text ?? 'Событие без текста'}</p>
-              </article>
-            ))}
-          </div>
+      <section className="panel play-tabs-panel">
+        <div className="tab-list">
+          <button className={activeTab === 'journal' ? 'tab-button active' : 'tab-button'} onClick={() => setActiveTab('journal')}>Журнал</button>
+          <button className={activeTab === 'inventory' ? 'tab-button active' : 'tab-button'} onClick={() => setActiveTab('inventory')}>Инвентарь</button>
+          <button className={activeTab === 'progress' ? 'tab-button active' : 'tab-button'} onClick={() => setActiveTab('progress')}>Прогресс</button>
         </div>
 
-        <div className="panel">
-          <h2>Инвентарь</h2>
-          {inventory.length === 0 && <p className="muted">Инвентарь пуст или backend пока не вернул предметы.</p>}
-          <div className="inventory-list">
-            {inventory.map((item, index) => (
-              <article className="inventory-item" key={item.id ?? index}>
-                <strong>{item.name}</strong>
-                <span>×{item.quantity ?? 1}</span>
-              </article>
-            ))}
+        {activeTab === 'journal' && (
+          <div className="journal-panel">
+            {statusQuery.isLoading && <div className="info-box">Загружаю сцену...</div>}
+            {statusQuery.isError && <div className="error-box">Ошибка загрузки play/status.</div>}
+            {!statusQuery.isLoading && entries.length === 0 && (
+              <div className="empty-state"><div className="empty-state-icon">✦</div><h3>Журнал пуст</h3><p>Отправь первое действие мастеру.</p></div>
+            )}
+            <div className="journal-list chat-list">
+              {entries.map((entry, index) => (
+                <article className="journal-entry chat-entry" key={entry.id ?? index}>
+                  <small>{entry.type ?? entry.source ?? 'master'}</small>
+                  <p>{entry.message ?? entry.text ?? 'Событие без текста'}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
+
+        {activeTab === 'inventory' && (
+          <div>
+            {inventory.length === 0 && <div className="empty-state"><div className="empty-state-icon">◇</div><h3>Инвентарь пуст</h3><p>Предметы появятся после наград, покупок или находок.</p></div>}
+            <div className="inventory-list">
+              {inventory.map((item, index) => (
+                <article className="inventory-item" key={item.id ?? index}>
+                  <strong>{item.name}</strong>
+                  <span>×{item.quantity ?? 1}</span>
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'progress' && (
+          <div className="progress-details">
+            <div className="diagnostic-row"><span>Уровень</span><strong>{character?.level ?? 1}</strong></div>
+            <div className="diagnostic-row"><span>Опыт</span><strong>{xp} / {xpNext}</strong></div>
+            <div className="diagnostic-row"><span>Бонус мастерства</span><strong>+{character?.proficiencyBonus ?? 2}</strong></div>
+            <div className="diagnostic-row"><span>Повышение уровня</span><strong>{character?.levelUpAvailable ? 'доступно' : 'недоступно'}</strong></div>
+          </div>
+        )}
       </section>
     </AppShell>
   );
