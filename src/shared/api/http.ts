@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080';
 
@@ -17,6 +17,19 @@ http.interceptors.request.use((config) => {
   return config;
 });
 
+http.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      clearAuthTokens();
+      if (window.location.pathname !== '/login') {
+        window.location.assign('/login');
+      }
+    }
+    return Promise.reject(error);
+  },
+);
+
 export function saveAuthTokens(accessToken: string, refreshToken?: string) {
   localStorage.setItem('accessToken', accessToken);
   if (refreshToken) {
@@ -27,4 +40,12 @@ export function saveAuthTokens(accessToken: string, refreshToken?: string) {
 export function clearAuthTokens() {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
+}
+
+export function getApiErrorMessage(error: unknown) {
+  if (axios.isAxiosError(error)) {
+    const data = error.response?.data as { message?: string; title?: string } | undefined;
+    return data?.message ?? data?.title ?? error.message;
+  }
+  return 'Неизвестная ошибка';
 }
