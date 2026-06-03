@@ -13,7 +13,7 @@ export function GamesPage() {
     mutationFn: createGameState,
     onSuccess: async (game) => {
       await queryClient.invalidateQueries({ queryKey: ['game-states'] });
-      navigate(`/games/${game.id}/character`);
+      navigate(`/games/${game.id}`);
     },
   });
 
@@ -42,7 +42,7 @@ export function GamesPage() {
             <div className="empty-state">
               <div className="empty-state-icon">✦</div>
               <h3>Кампаний пока нет</h3>
-              <p>Создай первую игру справа, после этого появится экран создания персонажа.</p>
+              <p>Создай первую игру справа, после этого появится экран деталей кампании.</p>
             </div>
           )}
           <div className="cards-list">
@@ -53,6 +53,7 @@ export function GamesPage() {
                   <p>{game.id}</p>
                 </div>
                 <div className="row-actions">
+                  <Link className="secondary-button" to={`/games/${game.id}`}>Детали</Link>
                   <Link className="secondary-button" to={`/games/${game.id}/character`}>Персонаж</Link>
                   <Link className="primary-button small" to={`/play/${game.id}`}>Играть</Link>
                 </div>
