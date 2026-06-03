@@ -19,7 +19,9 @@ export function GamesPage() {
 
   function submit(event: FormEvent) {
     event.preventDefault();
-    createMutation.mutate({ name });
+    if (name.trim()) {
+      createMutation.mutate({ name: name.trim() });
+    }
   }
 
   return (
@@ -34,8 +36,15 @@ export function GamesPage() {
       <section className="grid two-columns">
         <div className="panel">
           <h2>Сохранения</h2>
-          {gamesQuery.isLoading && <p className="muted">Загрузка...</p>}
+          {gamesQuery.isLoading && <div className="info-box">Загружаю кампании...</div>}
           {gamesQuery.isError && <div className="error-box">Ошибка загрузки /api/game-states.</div>}
+          {gamesQuery.isSuccess && gamesQuery.data.length === 0 && (
+            <div className="empty-state">
+              <div className="empty-state-icon">✦</div>
+              <h3>Кампаний пока нет</h3>
+              <p>Создай первую игру справа, после этого появится экран создания персонажа.</p>
+            </div>
+          )}
           <div className="cards-list">
             {(gamesQuery.data ?? []).map((game) => (
               <article className="game-card" key={game.id}>
@@ -55,7 +64,10 @@ export function GamesPage() {
           <h2>Новая игра</h2>
           <label>Название</label>
           <input value={name} onChange={(event) => setName(event.target.value)} />
-          <button className="primary-button" disabled={createMutation.isPending}>Создать кампанию</button>
+          {createMutation.isError && <div className="error-box">Не удалось создать кампанию.</div>}
+          <button className="primary-button" disabled={createMutation.isPending || !name.trim()}>
+            {createMutation.isPending ? 'Создаю...' : 'Создать кампанию'}
+          </button>
         </form>
       </section>
     </AppShell>
