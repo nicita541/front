@@ -10,21 +10,23 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@tanstack/react-query": "latest",
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "typescript": "latest",
+    "axios": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",
-    "axios": "latest",
-    "zustand": "latest",
-    "@tanstack/react-query": "latest"
+    "vite": "latest",
+    "zustand": "latest"
   },
   "devDependencies": {
-    "eslint": "latest",
     "@eslint/js": "latest",
-    "typescript-eslint": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
     "eslint-plugin-react-hooks": "latest",
-    "eslint-plugin-react-refresh": "latest"
+    "eslint-plugin-react-refresh": "latest",
+    "typescript": "latest",
+    "typescript-eslint": "latest"
   }
 }
