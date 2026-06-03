@@ -76,6 +76,10 @@ label { display: block; margin: 14px 0 8px; color: var(--muted); font-size: 13px
 .error-box { border: 1px solid rgba(216,102,102,0.45); background: rgba(216,102,102,0.12); color: #ffc1c1; padding: 12px; border-radius: 14px; margin: 14px 0; }
 .success-box { border: 1px solid rgba(101,184,115,0.45); background: rgba(101,184,115,0.12); color: #c8ffd1; padding: 10px 12px; border-radius: 14px; margin-top: 12px; }
 .info-box { border: 1px solid rgba(214,163,60,0.35); background: rgba(214,163,60,0.10); color: #ffe2a2; padding: 10px 12px; border-radius: 14px; margin-top: 12px; }
+.empty-state { border: 1px dashed rgba(214,163,60,0.35); background: rgba(214,163,60,0.06); border-radius: 18px; padding: 24px; text-align: center; margin: 14px 0; }
+.empty-state-icon { width: 44px; height: 44px; display: grid; place-items: center; margin: 0 auto 10px; border-radius: 14px; background: rgba(214,163,60,0.14); color: #ffd98c; font-size: 22px; }
+.empty-state h3 { margin: 0 0 8px; }
+.empty-state p { margin: 0; color: var(--muted); }
 
 .play-layout { display: grid; grid-template-columns: 1fr 340px; gap: 18px; margin-bottom: 18px; }
 .scene-panel { min-height: 430px; background: linear-gradient(145deg, rgba(33, 43, 51, 0.92), rgba(23, 26, 39, 0.96)); display: flex; flex-direction: column; justify-content: space-between; }
