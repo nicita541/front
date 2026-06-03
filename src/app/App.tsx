@@ -1,10 +1,11 @@
+import type { ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { LoginPage } from '../pages/LoginPage';
 import { GamesPage } from '../pages/GamesPage';
 import { CharacterCreatePage } from '../pages/CharacterCreatePage';
 import { PlayPage } from '../pages/PlayPage';
 
-function RequireAuth({ children }: { children: JSX.Element }) {
+function RequireAuth({ children }: { children: ReactElement }) {
   const token = localStorage.getItem('accessToken');
   if (!token) {
     return <Navigate to="/login" replace />;
