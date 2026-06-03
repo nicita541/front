@@ -11,7 +11,7 @@
 - TanStack Query
 - Axios
 
-## Запуск
+## Локальный запуск
 
 ```bash
 npm install
@@ -25,6 +25,14 @@ VITE_API_BASE_URL=http://localhost:8080
 ```
 
 Можно скопировать `.env.example` в `.env` и поменять адрес API.
+
+## Docker
+
+```bash
+docker compose -f compose.frontend.yml up -d --build
+```
+
+Важно: `VITE_API_BASE_URL` в Vite подставляется во время сборки frontend. Если адрес backend меняется, пересобери контейнер.
 
 ## Основные маршруты
 
@@ -46,3 +54,16 @@ VITE_API_BASE_URL=http://localhost:8080
 - `POST /api/play/{gameStateId}/actions`
 
 Если в Swagger фактический путь действия игрока отличается, нужно поправить только `src/shared/api/playApi.ts`.
+
+## Что уже есть в UI
+
+- Авторизация с сохранением JWT
+- Список кампаний
+- Создание game state
+- Создание персонажа
+- Игровой экран
+- Быстрые действия игрока
+- Журнал событий
+- Карточка персонажа
+- XP progress и level-up indicator
+- Инвентарь
