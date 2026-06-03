@@ -66,7 +66,7 @@ label { display: block; margin: 14px 0 8px; color: var(--muted); font-size: 13px
 .game-card p { margin: 0; color: var(--muted); font-size: 13px; word-break: break-all; }
 .row-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-.primary-button, .secondary-button, .link-button, .chip-button { border: 0; border-radius: 14px; padding: 12px 16px; cursor: pointer; font-weight: 800; display: inline-flex; justify-content: center; align-items: center; }
+.primary-button, .secondary-button, .link-button, .chip-button, .tab-button { border: 0; border-radius: 14px; padding: 12px 16px; cursor: pointer; font-weight: 800; display: inline-flex; justify-content: center; align-items: center; }
 .primary-button { background: var(--gold); color: #171106; }
 .primary-button:disabled { opacity: 0.6; cursor: not-allowed; }
 .primary-button.small { padding: 10px 12px; }
@@ -96,14 +96,20 @@ label { display: block; margin: 14px 0 8px; color: var(--muted); font-size: 13px
 .progress-label strong { color: var(--text); }
 .progress-bar { height: 10px; background: #10131d; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
 .progress-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--green), var(--gold)); }
-.bottom-grid { align-items: start; }
+.play-tabs-panel { margin-top: 18px; }
+.tab-list { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+.tab-button { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--line); }
+.tab-button.active { background: rgba(214,163,60,0.16); color: #ffd98c; border-color: rgba(214,163,60,0.42); }
 .journal-list { display: grid; gap: 10px; }
+.chat-list { max-height: 420px; overflow: auto; padding-right: 6px; }
 .journal-entry { border-left: 3px solid var(--gold); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 12px 14px; }
-.journal-entry small { color: var(--muted); }
-.journal-entry p { margin: 6px 0 0; }
+.chat-entry { max-width: 860px; background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(214,163,60,0.06)); }
+.journal-entry small { color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.journal-entry p { margin: 6px 0 0; line-height: 1.55; }
 .inventory-list { display: grid; gap: 10px; }
 .inventory-item { display: flex; justify-content: space-between; gap: 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 12px; }
 .inventory-item span { color: var(--muted); }
+.progress-details { display: grid; gap: 10px; max-width: 720px; }
 .diagnostics-panel { margin-top: 18px; }
 .diagnostic-row { display: flex; justify-content: space-between; gap: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); border-radius: 14px; padding: 12px; margin-top: 10px; }
 .diagnostic-row span { color: var(--muted); }
