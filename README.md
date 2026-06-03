@@ -26,13 +26,20 @@ VITE_API_BASE_URL=http://localhost:8080
 
 Можно скопировать `.env.example` в `.env` и поменять адрес API.
 
+## Проверка качества
+
+```bash
+npm run lint
+npm run build
+```
+
 ## Docker
 
 ```bash
 docker compose -f compose.frontend.yml up -d --build
 ```
 
-Важно: `VITE_API_BASE_URL` в Vite подставляется во время сборки frontend. Если адрес backend меняется, пересобери контейнер.
+Важно: `VITE_API_BASE_URL` в Vite подставляется во время сборки frontend. В Docker это передаётся через `build.args` в `compose.frontend.yml`. Если адрес backend меняется, поменяй build arg и пересобери контейнер.
 
 ## Основные маршруты
 
@@ -79,3 +86,4 @@ docker compose -f compose.frontend.yml up -d --build
 
 - `docs/API_CONTRACT.md` — ожидаемый контракт backend API
 - `docs/FRONTEND_ARCHITECTURE.md` — структура frontend
+- `docs/RUNBOOK.md` — запуск, Docker и частые проблемы
