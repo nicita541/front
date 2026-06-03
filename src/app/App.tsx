@@ -4,6 +4,7 @@ import { LoginPage } from '../pages/LoginPage';
 import { GamesPage } from '../pages/GamesPage';
 import { CharacterCreatePage } from '../pages/CharacterCreatePage';
 import { PlayPage } from '../pages/PlayPage';
+import { DiagnosticsPage } from '../pages/DiagnosticsPage';
 
 function RequireAuth({ children }: { children: ReactElement }) {
   const token = localStorage.getItem('accessToken');
@@ -38,6 +39,14 @@ export function App() {
         element={
           <RequireAuth>
             <PlayPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/diagnostics"
+        element={
+          <RequireAuth>
+            <DiagnosticsPage />
           </RequireAuth>
         }
       />
