@@ -13,7 +13,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <Link className="brand" to="/games">
+        <Link className="brand" to="/dashboard">
           <span className="brand-mark">D20</span>
           <span>
             <strong>D&D AI Master</strong>
@@ -21,6 +21,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </span>
         </Link>
         <nav className="nav">
+          <NavLink to="/dashboard">Главная</NavLink>
           <NavLink to="/games">Мои игры</NavLink>
           <NavLink to="/diagnostics">Диагностика API</NavLink>
           <a href="http://localhost:8080/swagger" target="_blank" rel="noreferrer">Swagger</a>
