@@ -1,7 +1,8 @@
+import type { ReactNode } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { clearAuthTokens } from '../shared/api/http';
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   function logout() {
@@ -21,6 +22,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </Link>
         <nav className="nav">
           <NavLink to="/games">Мои игры</NavLink>
+          <NavLink to="/diagnostics">Диагностика API</NavLink>
           <a href="http://localhost:8080/swagger" target="_blank" rel="noreferrer">Swagger</a>
         </nav>
         <button className="ghost-button" onClick={logout}>Выйти</button>
